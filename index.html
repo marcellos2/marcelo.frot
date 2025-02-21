@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema profissional de gestão de frotas e veículos da Tecnoiso">
+    <title>Tecnoiso - Frota e Gestão de Veículos</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Corpo da página com vídeo de fundo */
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Garantir que a altura da página ocupe toda a tela */
+            overflow: hidden; /* Evitar rolagem se não necessária */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Vídeo de fundo */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que o vídeo cubra toda a tela */
+            z-index: -1; /* Coloca o vídeo atrás de todo o conteúdo */
+        }
+
+        /* Sobreposição de gradiente para melhorar a legibilidade do conteúdo */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Gradiente escuro para contraste */
+            z-index: 0;
+        }
+
+        /* Cabeçalho */
+        header {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 2;
+            padding: 100px 20px 20px; /* Espaço superior maior */
+            margin-bottom: 30px; /* Separação do formulário */
+        }
+
+        /* Estilo da imagem no cabeçalho */
+        header img {
+            position: static; /* Remove posicionamento absoluto */
+            display: block;
+            margin: 0 auto 20px; /* Centraliza a logo */
+            width: 180px; /* Tamanho aumentado */
+            height: auto; /* Manter proporção */
+        }
+
+        h1 {
+            font-size: 2rem; /* Reduz tamanho para telas menores */
+            font-weight: bold;
+            color: #e60000; /* Vermelho */
+            margin-top: 0;
+        }
+
+        /* Formulário */
+        .form-container {
+            max-width: 450px;
+            width: 100%;
+            margin: 20px;
+            background-color: rgba(255, 255, 255, 0.97); /* Fundo branco translúcido */
+            backdrop-filter: blur(2px); /* Efeito de vidro suave */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #e60000; /* Vermelho */
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #444; /* Cinza mais escuro */
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: #f8f8f8; /* Fundo claro para inputs */
+            transition: all 0.3s; /* Suaviza todas as propriedades */
+        }
+
+        input[type="email"]:hover,
+        input[type="password"]:hover {
+            background: #fff; /* Feedback visual ao passar o mouse */
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border: 1px solid #e60000; /* Bordas vermelhas quando focado */
+            outline: none;
+        }
+
+        /* Estilo do botão */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #e60000; /* Vermelho */
+            color: white;
+            border: none;
+            border-radius: 5px; /* Botão arredondado */
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px; /* Melhora legibilidade */
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #cc0000; /* Cor mais escura de vermelho */
+            transform: scale(1.02); /* Efeito de aumento suave no hover */
+        }
+
+        button:active {
+            background-color: #b30000; /* Efeito ao clicar */
+            transform: scale(0.98); /* Efeito de diminuição no clique */
+        }
+
+        /* Links de ação (Cadastro e Esqueceu a senha) */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            flex-wrap: wrap; /* Permite quebra de linha */
+            gap: 10px;
+        }
+
+        .form-actions a {
+            color: #e60000;
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap; /* Evita quebra de texto */
+            padding: 4px 0; /* Área de clique maior */
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .form-actions a:hover {
+            color: #b30000; /* Cor mais escura de vermelho */
+            text-decoration: underline;
+        }
+
+        .form-actions a:active {
+            color: #990000;
+        }
+
+        /* Rodapé */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 3;
+            font-size: 0.8rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            header img {
+                width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Vídeo de fundo -->
+<video id="video-background" autoplay muted loop>
+    <source src="X:/Marcelo/fundo.mp4" type="video/mp4">
+  
+</video>
+
+<!-- Sobreposição de gradiente para melhorar o contraste -->
+<div class="overlay"></div>
+
+<!-- Cabeçalho -->
+<header>
+    <img alt="Tecnoiso" src="X:/Marcelo/primeira.png"> <!-- Substitua pelo caminho correto da sua logo -->
+    <h1>Tecnoiso - Frota e Gestão de Veículos</h1>
+</header>
+
+<!-- Formulário -->
+<div class="form-container">
+    <h2>Login</h2>
+    <form action="processar_login.php" method="POST">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+
+        <button type="submit">Login</button>
+        
+        <!-- Links para cadastro e "Esqueceu a senha?" -->
+        <div class="form-actions">
+            <a href="#">Esqueceu a senha?</a>
+            <a href="cadastro.html">Ainda não tem uma conta? Cadastre-se</a>
+        </div>
+    </form>
+</div>
+
+<!-- Rodapé -->
+<footer>
+    © 2024 Tecnoiso - Todos os direitos reservados
+</footer>
+
+</body>
+</html>
